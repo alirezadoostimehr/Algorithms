@@ -1,15 +1,18 @@
+// O(n)
+// It also can be done in O(n * Log(n)) with using map
 package main
 
 import "fmt"
 
-func main() {
-	var n int
-	ans := 0
-	fmt.Scan(n)
-	for i := 0; i < n; i++ {
-		var x int
-		fmt.Scan(x)
-		ans ^= x
+func run(a []int) int {
+	result := 0
+	for _, val := range a {
+		result ^= val
 	}
-	fmt.Println(ans)
+	return result
+}
+
+func main() {
+	a := []int{1, 2, 3, 1, 2}
+	fmt.Print(run(a))
 }

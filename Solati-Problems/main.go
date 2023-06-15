@@ -5,23 +5,16 @@ import (
 	"fmt"
 )
 
-type pii struct {
-	first  int
-	secont int
-}
-
-func run(a []int, sum int) pii {
-	ind := make(map[int]int)
-	for i, val := range a {
-		if ind[sum-val] != 0 {
-			return pii{ind[sum-val] - 1, i}
-		}
-		ind[val] = i + 1
+func run(a []int) int {
+	n := len(a) + 1
+	sum := (n * (n + 1)) / 2
+	for _, val := range a {
+		sum -= val
 	}
-	return pii{-1, -1}
+	return sum
 }
 
 func main() {
-	a := []int{1, 2, 3, 5, 7, 11}
-	fmt.Print(run(a, 16))
+	a := []int{1, 2, 6, 5, 4}
+	fmt.Print(run(a))
 }

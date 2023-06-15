@@ -1,5 +1,4 @@
 // O(n)
-// It also can be done in O(n * Log(n)) with using map
 package main
 
 import (

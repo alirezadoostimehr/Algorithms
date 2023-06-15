@@ -3,14 +3,23 @@ package main
 
 import (
 	"fmt"
-	"sort"
 )
 
 func run(a []int, n int) int {
-	sort.Slice(a, func(i, j int) bool {
-		return a[i] < a[j]
-	})
-	return a[len(a)-n]
+	cnt := make(map[int]int)
+	for _, val := range a {
+		cnt[val]++
+	}
+	n = len(a) - n
+	now := 0
+	for key, val := range cnt {
+		if now+val >= n {
+			return key
+		}
+		now += n
+
+	}
+	return 0
 }
 
 func main() {

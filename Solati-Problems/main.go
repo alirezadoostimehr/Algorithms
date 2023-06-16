@@ -6,11 +6,9 @@ import (
 )
 
 func run(a []int, n int) []int {
-	res := make([]int, 0)
-	for i := 0; i < len(a); i++ {
-		res = append(res, a[((i-n)+len(a))%len(a)])
-	}
-	return res
+	n %= len(a)
+	a = append(a[len(a)-n:], a[:len(a)-n]...)
+	return a
 }
 
 func main() {

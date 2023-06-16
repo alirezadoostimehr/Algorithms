@@ -5,14 +5,21 @@ import (
 	"fmt"
 )
 
-func run(a []int) int {
-	res := 0
-	cnt := 0
-	for _, val := range a {
+type pii struct {
+	first  int
+	second int
+}
+
+func run(a []int) []pii {
+	res := make([]pii, 0)
+	zeros := make([]int, 0)
+	for i, val := range a {
 		if val > 0 {
-			res += cnt
+			for _, zero := range zeros {
+				res = append(res, pii{zero, i})
+			}
 		} else {
-			cnt++
+			zeros = append(zeros, i)
 		}
 	}
 	return res

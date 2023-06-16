@@ -3,22 +3,37 @@ package main
 
 import (
 	"fmt"
-	"math"
 )
+
+func min(a, b int) int {
+	if a < b {
+		return a
+	}
+	return b
+}
+
+func abs(a int) int {
+	if a < 0 {
+		return -a
+	}
+	return a
+}
 
 func run(a []int) int {
 	sum := 0
 	for _, val := range a {
 		sum += val
 	}
-	res := (int)(math.Abs((float64)(sum)))
-	s1 := 0
-	s2 := sum
+
+	res := abs(sum)
+	prefixSum := 0
+	suffixSum := sum
 	for _, val := range a {
-		s1 += val
-		s2 -= val
-		res = (int)(math.Min(math.Abs((float64)(s1-s2)), (float64)(res)))
+		prefixSum += val
+		suffixSum -= val
+		res = min(res, abs(suffixSum-prefixSum))
 	}
+
 	return res
 }
 

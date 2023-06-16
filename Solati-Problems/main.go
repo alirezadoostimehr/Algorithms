@@ -5,27 +5,21 @@ import (
 	"fmt"
 )
 
-type pii struct {
-	first  int
-	second int
-}
-
-func run(a []int) []pii {
-	res := make([]pii, 0)
-	zeros := make([]int, 0)
-	for i, val := range a {
-		if val > 0 {
-			for _, zero := range zeros {
-				res = append(res, pii{zero, i})
-			}
-		} else {
-			zeros = append(zeros, i)
+func run(a []int) bool {
+	exists := make(map[int]bool)
+	sum := 0
+	for _, val := range a {
+		if exists[val] {
+			return false
 		}
+		exists[val] = true
+		sum += val
 	}
-	return res
+	n := len(a)
+	return sum == (n*(n+1))/2
 }
 
 func main() {
-	a := []int{0, 1, 0, 1, 1}
+	a := []int{1, 4}
 	fmt.Print(run(a))
 }

@@ -3,34 +3,17 @@ package main
 
 import (
 	"fmt"
-	"sort"
 )
 
-func run(a []int, n int) int {
-	cnt := make(map[int]int)
-	for _, val := range a {
-		cnt[val]++
+func run(a []int, n int) []int {
+	res := make([]int, 0)
+	for i := 0; i < len(a); i++ {
+		res = append(res, a[((i-n)+len(a))%len(a)])
 	}
-	keys := make([]int, 0)
-	for key := range cnt {
-		keys = append(keys, key)
-	}
-	sort.Slice(keys, func(i, j int) bool {
-		return keys[i] < keys[j]
-	})
-	n = len(a) - n
-	now := 0
-	for _, val := range keys {
-		now += cnt[val]
-		if now >= n {
-			return val
-		}
-
-	}
-	return 0
+	return res
 }
 
 func main() {
-	a := []int{1, 2, 6, 5, 4, 4}
+	a := []int{1, 2, 3, 4}
 	fmt.Print(run(a, 3))
 }

@@ -5,13 +5,20 @@ import (
 	"fmt"
 )
 
-func run(a []int, n int) []int {
-	n %= len(a)
-	a = append(a[len(a)-n:], a[:len(a)-n]...)
-	return a
+func run(a []int) int {
+	res := 0
+	cnt := 0
+	for _, val := range a {
+		if val > 0 {
+			res += cnt
+		} else {
+			cnt++
+		}
+	}
+	return res
 }
 
 func main() {
-	a := []int{1, 2, 3, 4}
-	fmt.Print(run(a, 3))
+	a := []int{0, 1, 0, 1, 1}
+	fmt.Print(run(a))
 }
